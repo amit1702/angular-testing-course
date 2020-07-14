@@ -46,5 +46,8 @@ describe('CourseService', () => {
     req.flush(COURSES[12]);
   });
 
+  afterEach(() => {
+    httpTestingController.verify();
+  });
 
 });
