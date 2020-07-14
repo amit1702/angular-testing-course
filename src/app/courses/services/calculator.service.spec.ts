@@ -8,7 +8,6 @@ describe('CalculatorService', () => {
 
   beforeEach(() => {
     loggerSpy = jasmine.createSpyObj('LoggerService', ['log']);
-    // calculator = new CalculatorService(loggerSpy);
     TestBed.configureTestingModule({
       providers: [
         CalculatorService,
@@ -22,6 +21,7 @@ describe('CalculatorService', () => {
     expect(calculator.add(2, 2)).toBe(4, 'Unexpected addition result');
     expect(loggerSpy.log).toHaveBeenCalledTimes(1);
   });
+  
   it('should subtract 2 numbers', () => {
     expect(calculator.subtract(2, 2)).toBe(0, 'Unexpected subtraction result');
     expect(loggerSpy.log).toHaveBeenCalledTimes(1);
