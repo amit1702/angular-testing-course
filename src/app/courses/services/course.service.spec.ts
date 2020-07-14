@@ -22,13 +22,10 @@ describe('CourseService', () => {
   it('should retrieve all courses', () => {
     courseService.findAllCourses()
       .subscribe(courses => {
-        console.log('courses:' + courses[0].toString());
         expect(courses).toBeTruthy('No courses returned');
-
         expect(courses.length).toBe(12);
 
         const course = courses.find(courseObj => courseObj.id === 12);
-
         expect(course.titles.description).toBe('Angular Testing Course', 'Course description does not match');
       });
 
