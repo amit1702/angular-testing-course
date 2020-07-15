@@ -19,15 +19,29 @@ import {click} from '../common/test-utils';
 describe('HomeComponent', () => {
 
   let fixture: ComponentFixture<HomeComponent>;
-  let component:HomeComponent;
-  let el: DebugElement;
+  let component: HomeComponent;
+  let elementDe: DebugElement;
 
-  beforeEach((() => {
-
-
+  beforeEach(async(() => {
+    const coursesServiceSpy: any =
+      jasmine.createSpyObj('CoursesService', ['findAllCourses']);
+    TestBed.configureTestingModule({
+      imports: [
+        CoursesModule,
+        NoopAnimationsModule
+      ],
+      providers: [
+        {provide: CoursesService, useValue: coursesServiceSpy}
+      ]
+    }).compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(HomeComponent);
+        component = fixture.componentInstance;
+        elementDe = fixture.debugElement;
+      });
   }));
 
-  it("should create the component", () => {
+  it('should create the component' , () => {
 
     expect(component).toBeTruthy();
 
