@@ -25,6 +25,9 @@ describe('HomeComponent', () => {
 
   const beginnerCourses = setupCourses()
     .filter(course => course.category === 'BEGINNER');
+  const advancedCourses = setupCourses()
+    .filter(course => course.category === 'ADVANCED');
+  const allCourses = setupCourses();
 
   beforeEach(async(() => {
     const coursesServiceSpy: any =
@@ -54,29 +57,32 @@ describe('HomeComponent', () => {
 
 
   it("should display only beginner courses", () => {
-
     coursesService.findAllCourses.and.returnValue(of(beginnerCourses));
     fixture.detectChanges();
 
     const tabs = elementDe.queryAll(By.css('.mat-tab-label'));
 
     expect(tabs.length).toBe(1, 'Unexpected number of tabs');
-
-    // const b
   });
 
 
   it("should display only advanced courses", () => {
+    coursesService.findAllCourses.and.returnValue(of(advancedCourses));
+    fixture.detectChanges();
 
-      pending();
+    const tabs = elementDe.queryAll(By.css('.mat-tab-label'));
 
+    expect(tabs.length).toBe(1, 'Unexpected number of tabs');
   });
 
 
   it("should display both tabs", () => {
+    coursesService.findAllCourses.and.returnValue(of(allCourses));
+    fixture.detectChanges();
 
-    pending();
+    const tabs = elementDe.queryAll(By.css('.mat-tab-label'));
 
+    expect(tabs.length).toBe(2, 'Unexpected number of tabs');
   });
 
 
