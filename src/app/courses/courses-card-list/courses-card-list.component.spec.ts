@@ -20,6 +20,8 @@ describe('CoursesCardListComponent', () => {
   //2. debugging the component etc.
   let fixture: ComponentFixture<CoursesCardListComponent>;
 
+  let elementDe: DebugElement;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [CoursesModule]
@@ -28,18 +30,24 @@ describe('CoursesCardListComponent', () => {
       .then(() => {
         fixture = TestBed.createComponent(CoursesCardListComponent);
         component = fixture.componentInstance;
+        elementDe = fixture.debugElement;
       });
   }));
 
   it("should create the component", () => {
    expect(component).toBeTruthy();
-   console.log(component);
   });
 
 
   it("should display the course list", () => {
+    component.courses = setupCourses();
+    fixture.detectChanges();
+    //print html of the component
+    console.log(elementDe.nativeElement.outerHTML);
+    const cards = elementDe.queryAll(By.css('.course-card'));
 
-    pending();
+    expect(cards).toBeTruthy('Could not find cards');
+    expect(cards.length).toBe(12, 'Unexpected numebr of cards');
 
   });
 
