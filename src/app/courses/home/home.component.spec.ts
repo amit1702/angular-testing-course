@@ -21,6 +21,10 @@ describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
   let component: HomeComponent;
   let elementDe: DebugElement;
+  let coursesService: any;
+
+  const beginnerCourses = setupCourses()
+    .filter(course => course.category === 'BEGINNER');
 
   beforeEach(async(() => {
     const coursesServiceSpy: any =
@@ -38,6 +42,7 @@ describe('HomeComponent', () => {
         fixture = TestBed.createComponent(HomeComponent);
         component = fixture.componentInstance;
         elementDe = fixture.debugElement;
+        coursesService = TestBed.inject(CoursesService);
       });
   }));
 
@@ -50,8 +55,14 @@ describe('HomeComponent', () => {
 
   it("should display only beginner courses", () => {
 
-    pending();
+    coursesService.findAllCourses.and.returnValue(of(beginnerCourses));
+    fixture.detectChanges();
 
+    const tabs = elementDe.queryAll(By.css('.mat-tab-label'));
+
+    expect(tabs.length).toBe(1, 'Unexpected number of tabs');
+
+    // const b
   });
 
 
