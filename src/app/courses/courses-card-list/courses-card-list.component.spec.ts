@@ -34,16 +34,17 @@ describe('CoursesCardListComponent', () => {
       });
   }));
 
-  it("should create the component", () => {
+  it('should create the component', () => {
    expect(component).toBeTruthy();
   });
 
 
-  it("should display the course list", () => {
+  it('should display the course list', () => {
     component.courses = setupCourses();
     fixture.detectChanges();
-    //print html of the component
-    console.log(elementDe.nativeElement.outerHTML);
+
+    // print html of the component
+    // console.log(elementDe.nativeElement.outerHTML);
     const cards = elementDe.queryAll(By.css('.course-card'));
 
     expect(cards).toBeTruthy('Could not find cards');
@@ -52,13 +53,20 @@ describe('CoursesCardListComponent', () => {
   });
 
 
-  it("should display the first course", () => {
+  it('should display the first course', () => {
+    component.courses = setupCourses();
+    fixture.detectChanges();
 
-      pending();
+    const course = component.courses[0];
 
+    const card = elementDe.query(By.css('.course-card:first-child')),
+          title = card.query(By.css('mat-card-title')),
+          image = card.query(By.css('img'));
+
+    expect(card).toBeTruthy();
+    expect(title.nativeElement.textContent).toEqual(course.titles.description);
+    expect(image.nativeElement.src).toEqual(course.iconUrl);
   });
-
-
 });
 
 
