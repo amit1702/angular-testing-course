@@ -87,8 +87,20 @@ describe('HomeComponent', () => {
 
 
   it("should display advanced courses when tab clicked", () => {
+    coursesService.findAllCourses.and.returnValue(of(allCourses));
+    fixture.detectChanges();
 
-    pending();
+    const tabs = elementDe.queryAll(By.css('.mat-tab-label'));
+
+    click(tabs[1]);
+
+    fixture.detectChanges();
+
+    const cardTitles = elementDe.queryAll(By.css('mat-card-title'));
+
+    expect(cardTitles.length).toBeGreaterThan(0, 'Could not find card titles');
+
+    expect(cardTitles[0].nativeElement.textContent).toContain('Angular Security Course');
 
   });
 
