@@ -13,16 +13,27 @@ import {setupCourses} from '../common/setup-test-data';
 
 describe('CoursesCardListComponent', () => {
 
-  beforeEach(() => {
+  let component: CoursesCardListComponent;
+
+  //Fixture is a utitliy type, allows us to
+  //1. obtain instance of a component.
+  //2. debugging the component etc.
+  let fixture: ComponentFixture<CoursesCardListComponent>;
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [CoursesModule]
-    });
-  });
+    })
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(CoursesCardListComponent);
+        component = fixture.componentInstance;
+      });
+  }));
 
   it("should create the component", () => {
-
-   pending();
-
+   expect(component).toBeTruthy();
+   console.log(component);
   });
 
 
